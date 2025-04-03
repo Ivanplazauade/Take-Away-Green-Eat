@@ -1,0 +1,92 @@
+{
+    "menu": [
+      {
+        "category": "Wraps & Burgers",
+        "items": [
+          { "id": 1, "name": "Wrap De Pollo", "price": 12800, "image_url": "" },
+          { "id": 2, "name": "Porto Cheese Burger", "price": 57800, "original_price": 74000, "discount": "30%", "image_url": "" },
+          { "id": 3, "name": "Wrap Humita Y Queso Llanero", "price": 12900, "image_url": "" },
+          { "id": 4, "name": "Wrap Original Beef", "price": 12900, "image_url": "" },
+          { "id": 5, "name": "Wrap Caesar", "price": 12900, "image_url": "" },
+          { "id": 6, "name": "Wrap Veggie", "price": 11300, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Sandwiches",
+        "items": [
+          { "id": 7, "name": "Bagel De Salmón Con Huevo", "price": 11600, "image_url": "" },
+          { "id": 8, "name": "Sándwich Lomito De Praga 2.0", "price": 9800, "image_url": "" },
+          { "id": 9, "name": "Tostado De Campo", "price": 8300, "image_url": "" },
+          { "id": 10, "name": "Tostado Avocado Grill", "price": 8300, "image_url": "" },
+          { "id": 11, "name": "Tostado Cuatro Quesos & Tomate", "price": 8300, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Ensaladas & Pokes",
+        "items": [
+          { "id": 12, "name": "Ensalada Caesar Con Pollo", "price": 13300, "image_url": "" },
+          { "id": 13, "name": "Poke Pollo Teriyaki", "price": 8499, "original_price": 13500, "discount": "-31%", "image_url": "" },
+          { "id": 14, "name": "Poke De Salmón Ahumado", "price": 13300, "image_url": "" },
+          { "id": 15, "name": "Ensalada De Tofu", "price": 12900, "image_url": "" },
+          { "id": 16, "name": "Ensalada De Trucha", "price": 14300, "image_url": "" },
+          { "id": 17, "name": "Ensalada Quinoa Fest", "price": 12700, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Platos Calientes",
+        "items": [
+          { "id": 18, "name": "Pollo Keto", "price": 14000, "image_url": "" },
+          { "id": 19, "name": "Trucha Con Gremolata Y Papitas", "price": 15700, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Onigiris",
+        "items": [
+          { "id": 20, "name": "Onigiri Salmón Sushi", "price": 16000, "image_url": "" },
+          { "id": 21, "name": "Onigiri De Palta", "price": 5200, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Entradas",
+        "items": [
+          { "id": 22, "name": "Entradita Papas & Huevito", "price": 4700, "image_url": "" },
+          { "id": 23, "name": "Entradita Hummus & Zanas", "price": 4700, "image_url": "" },
+          { "id": 24, "name": "Entradita Huevo Keto", "price": 4700, "image_url": "" },
+          { "id": 25, "name": "Entradita Sushi Bowl", "price": 4700, "image_url": "" },
+          { "id": 26, "name": "Entradita Lentejas & Feta", "price": 4700, "image_url": "" },
+          { "id": 27, "name": "Entradita Guacamole", "price": 4700, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Snacks Saludables",
+        "items": [
+          { "id": 28, "name": "Summer Chia Pudding", "price": 5200, "image_url": "" },
+          { "id": 29, "name": "Pan De Queso", "price": 2600, "image_url": "" },
+          { "id": 30, "name": "Yogurt & Granola", "price": 6300, "image_url": "" },
+          { "id": 31, "name": "Yogurt & Frutas", "price": 6300, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Licuados & Jugos",
+        "items": [
+          { "id": 42, "name": "Jugo De Naranja", "price": 4600, "image_url": "" },
+          { "id": 43, "name": "Licuado Detox Green", "price": 4600, "image_url": "" },
+          { "id": 44, "name": "Licuado Luna Roja", "price": 4600, "image_url": "" },
+          { "id": 45, "name": "Licuado De Mango, Durazno Y Coco", "price": 4600, "image_url": "" },
+          { "id": 46, "name": "Limonada Con Jengibre", "price": 4350, "image_url": "" }
+        ]
+      },
+      {
+        "category": "Otras Bebidas",
+        "items": [
+          { "id": 47, "name": "Eco De Los Andes Con Gas", "price": 2300, "image_url": "" },
+          { "id": 48, "name": "Eco De Los Andes Sin Gas", "price": 2300, "image_url": "" },
+          { "id": 49, "name": "Pepsi", "price": 2500, "image_url": "" },
+          { "id": 50, "name": "Pepsi Black", "price": 2500, "image_url": "" },
+          { "id": 51, "name": "7 Up", "price": 2500, "image_url": "" },
+          { "id": 52, "name": "7 Up Free", "price": 2500, "image_url": "" }
+        ]
+      }
+    ]
+  }
+  
