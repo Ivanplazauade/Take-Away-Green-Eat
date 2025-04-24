@@ -1,5 +1,4 @@
-from data import usuarios
-
+usuarios = []
 def registrar_usuario():
     nombre = input("Nombre: ")
     email = input("Email: ")
