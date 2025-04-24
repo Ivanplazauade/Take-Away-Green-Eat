@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Take Away Green Eat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/iniciosesion.css') }}">
+</head>
+<body>
+    <div class="iniciar">
+        <img src="{{ url_for('static', filename='imagenes/logo.png') }}" alt="Logo de la cafetería" class="logo" width="120">
+        <h2>Registrarse</h2>
+        <form action="{{ url_for('registro') }}" method="post">
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="email" name="mail" placeholder="Correo electrónico" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <button type="submit">Registrar</button>
+            <a href="{{ url_for('iniciosesion') }}">Ya tengo cuenta</a>
+        </form>
+    </div>
+</body>
+</html>
