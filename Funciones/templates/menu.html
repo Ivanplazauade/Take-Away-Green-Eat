@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú - Green Eat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+<body>
+    <div class="contenido">
+        <h1>Menú de Productos</h1>
+
+        <div>
+            <a href="{{ url_for('menu', ordenar_por='nombre') }}">Ordenar por nombre</a> |
+            <a href="{{ url_for('menu', ordenar_por='precio') }}">Ordenar por precio</a>
+        </div>
+        
+
+        <div class="contenedor-menu">
+            {% for p in productos %}
+                <div class="producto">
+                    <img src="{{ url_for('static', filename='imagenes/' + p.imagen) }}" alt="{{ p.nombre }}">
+                    <h3>{{ p.nombre }}</h3>
+                    <p>${{ p.precio }}</p>
+                    <p class="categoria">{{ p.categoria.capitalize() }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
