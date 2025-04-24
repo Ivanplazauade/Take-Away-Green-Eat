@@ -1,0 +1,14 @@
+# Ignorar archivos de Python compilados
+*.pyc
+__pycache__/
+
+# Ignorar el archivo de usuarios.py
+usuarios.py
+
+# Ignorar carpetas de entorno virtual (si usas virtualenv o venv)
+venv/
+.env/
+
+# Ignorar archivos de configuración de editores
+.vscode/
+.idea/
