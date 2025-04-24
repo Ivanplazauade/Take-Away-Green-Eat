@@ -23,6 +23,10 @@ def guardar_usuarios(usuarios):
 # Lista de usuarios (cargada del archivo)
 usuarios = cargar_usuarios()
 
+
+
+
+
 @app.route('/')
 def index():
     return render_template('index.html')  # Página principal
