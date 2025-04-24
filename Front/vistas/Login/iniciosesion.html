@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Away - Green Eat</title>
+    <link rel="stylesheet" href="iniciosesion.css">
+
+</head>
+<body>
+    <div id="div-formulario">
+        <section id="contenedor-video">
+            <video src="videos-contacto/videocontacto.mp4" autoplay muted loop></video>
+        </section>
+        <div id="formulario">
+            <section class="formulario">
+                <form action="index.html" method="POST" class="form" onsubmit="return validarFormulario()">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Ingrese su Nombre completo" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Ingrese su Email" required>
+                </div>
+        
+                <div class="form-group full-width">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Hola, quería contactarlos..." required></textarea>
+                </div>
+        
+                <div class="form-group full-width">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" required> Terminos y condiciones
+                    </label>
+                </div>
+        
+                <input type="submit" class="btn" value="ENVIAR">
+                </form>
+            </section>
+        </div>
+    </div>
+    
+    <script>
+        function validarFormulario() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const mensaje = document.getElementById('mensaje').value;
+        const terms = document.getElementById('terms').checked; // Asegúrate de definir esta variable
+
+        if (!name || !email || !mensaje || !terms) {
+            alert('Por favor, completa todos los campos y acepta los términos.');
+            return false; // Impide el envío del formulario
+        }
+    
+        return true; // Permite el envío del formulario
+        }
+    </script>
+    
+</body>
+</html>
