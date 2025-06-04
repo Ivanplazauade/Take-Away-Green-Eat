@@ -17,14 +17,15 @@
 
         <div class="contenedor-menu">
             {% for p in productos %}
-                <div class="producto">
+                <a href="{{ url_for('detalle_producto', slug=p.slug) }}" class="producto">
                     <img src="{{ url_for('static', filename='imagenes/' + p.imagen) }}" alt="{{ p.nombre }}">
                     <h3>{{ p.nombre }}</h3>
                     <p>${{ p.precio }}</p>
                     <p class="categoria">{{ p.categoria.capitalize() }}</p>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>
 </body>
 </html>
+

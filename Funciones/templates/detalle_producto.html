@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ producto.nombre }} - Detalle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+<body>
+    <div class="contenido" style="text-align:center; padding: 40px;">
+        <h1>{{ producto.nombre }}</h1>
+        <img src="{{ url_for('static', filename='imagenes/' + producto.imagen) }}" 
+             alt="{{ producto.nombre }}" style="width:300px; border-radius:10px;">
+        <p style="font-size:20px;">Precio: ${{ producto.precio }}</p>
+        <p style="font-size:18px; color:gray;">Categoría: {{ producto.categoria.capitalize() }}</p>
+        <br>
+        <a href="{{ url_for('menu') }}" style="text-decoration:none; background:#2ecc71; color:white;
+           padding:10px 20px; border-radius:5px;">Volver al menú</a>
+    </div>
+</body>
+</html>

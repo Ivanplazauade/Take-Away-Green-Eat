@@ -66,7 +66,8 @@ def login():
                 <html>
                 <body style="font-family: Arial; text-align: center; padding-top: 100px;">
                     <h2>Bienvenido, {nombre_usuario}!</h2>
-                    <a href='/menu' style="text-decoration:none; padding:10px; background:#2ecc71; color:white; border-radius:5px;">Ir al menú</a>
+                    <a href='/menu' style="text-decoration:none; padding:10px; background:#2ecc71;
+                    color:white; border-radius:5px;">Ir al menú</a>
                 </body>
                 </html>"""
         else:
@@ -75,7 +76,8 @@ def login():
                 <html>
                 <body style="font-family: Arial; text-align: center; padding-top: 100px;">
                     <h3 style="color:red;">Correo o contraseña incorrectos</h3>
-                    <a href='/login' style="text-decoration:none; padding:10px; background:#e74c3c; color:white; border-radius:5px;">Volver</a>
+                    <a href='/login' style="text-decoration:none; padding:10px; background:#e74c3c;
+                    color:white; border-radius:5px;">Volver</a>
                 </body>
                 </html>
             """
@@ -89,10 +91,59 @@ def iniciosesion():
 # Ruta para mostrar el menú de productos, permite ordenarlos por nombre o precio
 @app.route('/menu')
 def menu():
-    criterio = request.args.get('ordenar_por', 'nombre')  # Obtenemos el criterio de ordenamiento
-    productos_ordenados = sorted(productos, key=lambda x: x[criterio])  # Ordenamos los productos
-    return render_template('menu.html', productos=productos_ordenados)  # Mostramos la vista del menú
+    criterio = request.args.get('ordenar_por', 'nombre')
+    if criterio not in ['nombre', 'precio']:
+        criterio = 'nombre'  # Valor por defecto seguro
+    
+    productos_ordenados = sorted(productos, key=lambda x: x[criterio])
+    return render_template('menu.html', productos=productos_ordenados)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Ruta para mostrar detalle individual del producto usando slug
+@app.route('/producto/<slug>')
+def detalle_producto(slug):
+    producto = next((p for p in productos if p.get('slug') == slug), None)
+    if producto:
+        return render_template('detalle_producto.html', producto=producto)
+    else:
+        return "<h3>Producto no encontrado</h3>", 404
 
 # Iniciamos la aplicación si ejecutamos este archivo directamente
 if __name__ == '__main__':
-    app.run(debug=True)  # Ejecutamos Flask en modo debug
+    app.run(debug=True)
