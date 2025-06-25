@@ -1,1 +1,1 @@
-lista_usuarios = [{'usuario': 'ivan', 'mail': 'plazaivanalt@gmail.com', 'contrasena': '123asd'}]
+lista_usuarios = [{'usuario': 'ivan', 'mail': 'plazaivanalt@gmail.com', 'contrasena': '123asd'}, {'usuario': 'agus', 'mail': 'agustina@gmail.com', 'contrasena': '123asd'}]

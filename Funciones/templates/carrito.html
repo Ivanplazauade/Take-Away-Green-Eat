@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f7f7f7;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #2ecc71;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .acciones {
+            margin-top: 30px;
+        }
+
+        a.boton {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        a.boton-rojo {
+            background-color: #e74c3c;
+        }
+
+        a.boton-azul {
+            background-color: #3498db;
+        }
+
+        .basura {
+            color: #e74c3c;
+            font-size: 20px;
+            text-decoration: none;
+            
+        }
+
+        .basura:hover {
+            opacity: 0.7;
+        }
+        .item-info {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Ajustá esto si querés más o menos espacio */
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>🛒 Tu Carrito</h1>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="background:#f1f1f1; padding:10px; border-radius:5px; list-style:none;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+    {% if mensaje %}
+      <div style="background:#dff0d8; padding:10px; border-radius:5px; color:#3c763d; margin-bottom:20px;">
+        {{ mensaje }}
+      </div>
+    {% endif %}
+
+    {% if carrito %}
+    <ul>
+        {% for item in carrito %}
+        <li>
+          <div class="item-info">
+            <span>{{ item.nombre }} - ${{ item.precio }}</span>
+            <a href="{{ url_for('eliminar_item_carrito', nombre=item.nombre) }}" class="basura" title="Eliminar">🗑</a>
+          </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total: ${{ total }}</h3>
+
+    <div class="acciones">
+        <a href="{{ url_for('menu') }}" class="boton boton-azul">⬅ Seguir pidiendo</a>
+        <a href="{{ url_for('comprar_carrito') }}" class="boton">💲 Comprar carrito</a>
+        <a href="{{ url_for('vaciar_carrito') }}" class="boton boton-rojo">🗑 Vaciar carrito</a>
+    </div>
+    {% else %}
+        <p>El carrito está vacío.</p>
+        <a href="{{ url_for('menu') }}" class="boton boton-azul">Ir al menú</a>
+    {% endif %}
+    
+
+</body>
+</html>

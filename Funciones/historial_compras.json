@@ -1,0 +1,46 @@
+[
+    {
+        "fecha": "2025-06-25 19:44:39",
+        "items": [
+            {
+                "nombre": "Batido de frutas",
+                "precio": 700
+            },
+            {
+                "nombre": "Agua mineral",
+                "precio": 350
+            }
+        ]
+    },
+    {
+        "fecha": "2025-06-25 19:46:00",
+        "items": [
+            {
+                "nombre": "Batido de frutas",
+                "precio": 700
+            }
+        ]
+    },
+    {
+        "fecha": "2025-06-25 19:46:10",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350
+            },
+            {
+                "nombre": "Agua mineral",
+                "precio": 350
+            }
+        ]
+    },
+    {
+        "fecha": "2025-06-25 19:55:25",
+        "items": [
+            {
+                "nombre": "Batido de frutas",
+                "precio": 700
+            }
+        ]
+    }
+]
