@@ -1,10 +1,15 @@
 # Importamos los módulos necesarios de Flask y el archivo de productos
 from flask import Flask, request, redirect, url_for, render_template
 from productos import productos
+from datetime import datetime
+from flask import Flask, request, redirect, url_for, render_template, flash
+import json
 
 app = Flask(__name__)  # Creamos la aplicación Flask
+app.secret_key = 'clave-super-secreta'  # Clave secreta para manejar sesiones y mensajes flash
 
 usuarios_file = 'usuarios.py'  # Archivo donde se guardarán los usuarios registrados
+carrito = []
 
 # Función para cargar los usuarios desde el archivo usuarios.py
 def cargar_usuarios():
@@ -100,49 +105,107 @@ def menu():
 
 
 
+# Ruta para mostrar el carrito de compra con los precios totales
+@app.route('/carrito')
+def ver_carrito():
+    total = sum(item['precio'] for item in carrito)
+    return render_template('carrito.html', carrito=carrito, total=total)
 
 
+# Ruta para agregar un producto al carrito, recibe el ID del producto
+@app.route('/agregar_al_carrito/<int:id>', methods=['POST'])
+def agregar_al_carrito(id):
+    for producto in productos:
+        if producto['id'] == id:
+            carrito.append({'nombre': producto['nombre'], 'precio': producto['precio']})
+            break
+    return redirect(url_for('ver_carrito'))
 
+# Función para generar un slug a partir del nombre del producto
+def generar_slug(nombre):
+    return "-".join(nombre.lower().split())
 
+# Ruta para ver los detalles de un producto específico, recibe el nombre del producto
+@app.route('/producto/<nombre>')
+def detalle_producto(nombre):
+    slug = generar_slug(nombre)
 
+    # Aseguramos que todos los productos tengan un slug
+    for producto in productos:
+        if 'slug' not in producto:
+            producto['slug'] = generar_slug(producto['nombre'])
 
+    # Buscamos el producto que coincida con el slug
+    producto_encontrado = next((p for p in productos if p['slug'] == slug), None)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Ruta para mostrar detalle individual del producto usando slug
-@app.route('/producto/<slug>')
-def detalle_producto(slug):
-    producto = next((p for p in productos if p.get('slug') == slug), None)
-    if producto:
-        return render_template('detalle_producto.html', producto=producto)
+    if producto_encontrado:
+        return render_template('detalle_producto.html', producto=producto_encontrado)
     else:
         return "<h3>Producto no encontrado</h3>", 404
+
+# Ruta para comprar el carrito, guarda el historial de compras
+@app.route('/comprar_carrito')
+def comprar_carrito():
+    global carrito
+    mensaje = ""
+
+    if not carrito:
+        mensaje = "⚠️ El carrito está vacío, no hay nada para comprar."
+        total = 0
+        return render_template('carrito.html', carrito=carrito, total=total, mensaje=mensaje)
+
+    # Crear nueva compra
+    compra = {
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "items": carrito.copy()
+    }
+
+    historial = []
+
+    # Intentar cargar historial anterior si existe
+    try:
+        with open('historial_compras.json', 'r') as f:
+            historial = json.load(f)
+    except FileNotFoundError:
+        historial = []
+    except Exception as e:
+        mensaje = f"⚠️ Error al leer el historial anterior: {e}"
+        historial = []
+
+    historial.append(compra)
+
+    try:
+        with open('historial_compras.json', 'w') as f:
+            json.dump(historial, f, indent=4)
+        mensaje = "✅ Carrito comprado y guardado en historial."
+        carrito.clear()
+    except Exception as e:
+        mensaje = f"❌ Error al guardar el historial: {e}"
+
+    total = sum(item['precio'] for item in carrito)
+    return render_template('carrito.html', carrito=carrito, total=total, mensaje=mensaje)
+
+
+    
+    
+@app.route('/eliminar_item/<nombre>')
+def eliminar_item_carrito(nombre):
+    global carrito
+    carrito = [item for item in carrito if item['nombre'] != nombre]
+    flash(f"🗑 Se eliminó '{nombre}' del carrito.")
+    return redirect(url_for('ver_carrito'))
+
+
+
+@app.route('/vaciar_carrito')
+def vaciar_carrito():
+    global carrito
+    carrito = []
+    flash("🧹 Carrito vaciado.")
+    return redirect(url_for('ver_carrito'))
+
+
+
 
 # Iniciamos la aplicación si ejecutamos este archivo directamente
 if __name__ == '__main__':
