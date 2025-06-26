@@ -5,11 +5,22 @@ from datetime import datetime
 from flask import Flask, request, redirect, url_for, render_template, flash
 import json
 
+
 app = Flask(__name__)  # Creamos la aplicación Flask
 app.secret_key = 'clave-super-secreta'  # Clave secreta para manejar sesiones y mensajes flash
 
+
 usuarios_file = 'usuarios.py'  # Archivo donde se guardarán los usuarios registrados
 carrito = []
+
+#-------------------------------------------------------------------------------------
+
+# Ruta para la página principal (landing page)
+@app.route('/')
+def index():
+    return render_template('LandingPage.html')  # Muestra la página principal
+
+#-------------------------------------------------------------------------------------
 
 # Función para cargar los usuarios desde el archivo usuarios.py
 def cargar_usuarios():
@@ -19,6 +30,8 @@ def cargar_usuarios():
     except ImportError:
         return []  # Si no existe el archivo, devuelve una lista vacía
 
+#-------------------------------------------------------------------------------------
+
 # Función para guardar los usuarios en el archivo usuarios.py
 def guardar_usuarios(usuarios):
     with open(usuarios_file, 'w') as f:
@@ -27,10 +40,7 @@ def guardar_usuarios(usuarios):
 
 usuarios = cargar_usuarios()  # Cargamos los usuarios al iniciar la app
 
-# Ruta para la página principal (landing page)
-@app.route('/')
-def index():
-    return render_template('LandingPage.html')  # Muestra la página principal
+#-------------------------------------------------------------------------------------
 
 # Ruta para registrarse, permite GET (mostrar formulario) y POST (procesar datos)
 @app.route('/registro', methods=['GET', 'POST'])
@@ -49,6 +59,8 @@ def registro():
         return redirect(url_for('login'))  # Redirige a la página de inicio de sesión
 
     return render_template('registro.html')  # Muestra el formulario de registro
+
+#-------------------------------------------------------------------------------------
 
 # Ruta para iniciar sesión, también acepta GET (mostrar) y POST (verificar)
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,10 +100,14 @@ def login():
             """
     return render_template('iniciosesion.html')  # Muestra el formulario de login
 
+#-------------------------------------------------------------------------------------
+
 # Ruta alternativa que también muestra el formulario de inicio de sesión
 @app.route('/iniciosesion')
 def iniciosesion():
     return render_template('iniciosesion.html')
+
+#-------------------------------------------------------------------------------------
 
 # Ruta para mostrar el menú de productos, permite ordenarlos por nombre o precio
 @app.route('/menu')
@@ -103,27 +119,27 @@ def menu():
     productos_ordenados = sorted(productos, key=lambda x: x[criterio])
     return render_template('menu.html', productos=productos_ordenados)
 
-
+#-------------------------------------------------------------------------------------
+def sumar_precios(lista):
+    if not lista:
+        return 0
+    return lista[0]['precio'] + sumar_precios(lista[1:])
+#-------------------------------------------------------------------------------------
 
 # Ruta para mostrar el carrito de compra con los precios totales
 @app.route('/carrito')
 def ver_carrito():
-    total = sum(item['precio'] for item in carrito)
+    total = sumar_precios(carrito)  # usamos la versión recursiva
     return render_template('carrito.html', carrito=carrito, total=total)
 
 
-# Ruta para agregar un producto al carrito, recibe el ID del producto
-@app.route('/agregar_al_carrito/<int:id>', methods=['POST'])
-def agregar_al_carrito(id):
-    for producto in productos:
-        if producto['id'] == id:
-            carrito.append({'nombre': producto['nombre'], 'precio': producto['precio']})
-            break
-    return redirect(url_for('ver_carrito'))
+#-------------------------------------------------------------------------------------
 
 # Función para generar un slug a partir del nombre del producto
 def generar_slug(nombre):
     return "-".join(nombre.lower().split())
+
+#-------------------------------------------------------------------------------------
 
 # Ruta para ver los detalles de un producto específico, recibe el nombre del producto
 @app.route('/producto/<nombre>')
@@ -142,6 +158,20 @@ def detalle_producto(nombre):
         return render_template('detalle_producto.html', producto=producto_encontrado)
     else:
         return "<h3>Producto no encontrado</h3>", 404
+    
+#-------------------------------------------------------------------------------------
+
+# Ruta para agregar un producto al carrito, recibe el ID del producto
+@app.route('/agregar_al_carrito/<int:id>', methods=['POST'])
+def agregar_al_carrito(id):
+    for producto in productos:
+        if producto['id'] == id:
+            carrito.append({'nombre': producto['nombre'], 'precio': producto['precio']})
+            break
+    return redirect(url_for('ver_carrito'))
+
+#-------------------------------------------------------------------------------------
+
 
 # Ruta para comprar el carrito, guarda el historial de compras
 @app.route('/comprar_carrito')
@@ -182,11 +212,11 @@ def comprar_carrito():
     except Exception as e:
         mensaje = f"❌ Error al guardar el historial: {e}"
 
-    total = sum(item['precio'] for item in carrito)
+    total = sumar_precios(carrito) 
     return render_template('carrito.html', carrito=carrito, total=total, mensaje=mensaje)
 
 
-    
+#-------------------------------------------------------------------------------------    
     
 @app.route('/eliminar_item/<nombre>')
 def eliminar_item_carrito(nombre):
@@ -195,16 +225,16 @@ def eliminar_item_carrito(nombre):
     flash(f"🗑 Se eliminó '{nombre}' del carrito.")
     return redirect(url_for('ver_carrito'))
 
-
+#-------------------------------------------------------------------------------------
 
 @app.route('/vaciar_carrito')
 def vaciar_carrito():
-    global carrito
-    carrito = []
+    carrito.clear()  # Método de listas que vacía el contenido
     flash("🧹 Carrito vaciado.")
     return redirect(url_for('ver_carrito'))
 
 
+#-------------------------------------------------------------------------------------
 
 
 # Iniciamos la aplicación si ejecutamos este archivo directamente
