@@ -42,5 +42,14 @@
                 "precio": 700
             }
         ]
+    },
+    {
+        "fecha": "2025-06-26 11:22:12",
+        "items": [
+            {
+                "nombre": "Batido de frutas",
+                "precio": 700
+            }
+        ]
     }
 ]
