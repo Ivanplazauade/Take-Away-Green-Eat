@@ -119,21 +119,23 @@ def menu():
     productos_ordenados = sorted(productos, key=lambda x: x[criterio])
     return render_template('menu.html', productos=productos_ordenados)
 
+
 #-------------------------------------------------------------------------------------
 def sumar_precios(lista):
     if not lista:
         return 0
-    return lista[0]['precio'] + sumar_precios(lista[1:])
+    return lista[0]['precio'] * lista[0]['cantidad'] + sumar_precios(lista[1:])
+
 #-------------------------------------------------------------------------------------
 
 # Ruta para mostrar el carrito de compra con los precios totales
 @app.route('/carrito')
 def ver_carrito():
-    total = sumar_precios(carrito)  # usamos la versión recursiva
+    total = sumar_precios(carrito)  # usamos la función definida
     return render_template('carrito.html', carrito=carrito, total=total)
 
-
 #-------------------------------------------------------------------------------------
+
 
 # Función para generar un slug a partir del nombre del producto
 def generar_slug(nombre):
@@ -192,7 +194,6 @@ def comprar_carrito():
         mensaje = "⚠️ El carrito está vacío, no hay nada para comprar."
         total = 0
         return render_template('carrito.html', carrito=carrito, total=total, mensaje=mensaje)
-
     # Crear nueva compra
     compra = {
         "fecha": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
@@ -200,9 +201,7 @@ def comprar_carrito():
         "productos": [item['nombre'] + " X " + str(item['cantidad']) for item in carrito],
         "total": sumar_precios(carrito),
     }
-
     historial = []
-
     # Intentar cargar historial anterior si existe
     try:
         with open('historial_compras.json', 'r') as f:
@@ -212,9 +211,7 @@ def comprar_carrito():
     except Exception as e:
         mensaje = f"⚠️ Error al leer el historial anterior: {e}"
         historial = []
-
     historial.append(compra)
-
     try:
         with open('historial_compras.json', 'w') as f:
             json.dump(historial, f, indent=4)
@@ -222,7 +219,6 @@ def comprar_carrito():
         carrito.clear()
     except Exception as e:
         mensaje = f"❌ Error al guardar el historial: {e}"
-
     total = sumar_precios(carrito) 
     return render_template('carrito.html', carrito=carrito, total=total, mensaje=mensaje)
 

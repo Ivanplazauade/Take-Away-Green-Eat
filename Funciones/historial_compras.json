@@ -126,5 +126,73 @@
             "Brownie con helado X 1"
         ],
         "total": 1250
+    },
+    {
+        "fecha": "03-07-2025 11:08:28",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 4
+            }
+        ],
+        "productos": [
+            "Agua mineral X 4"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 11:09:10",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 2
+            }
+        ],
+        "productos": [
+            "Agua mineral X 2"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 11:12:41",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 2
+            },
+            {
+                "nombre": "Brownie con helado",
+                "precio": 900,
+                "cantidad": 2
+            }
+        ],
+        "productos": [
+            "Agua mineral X 2",
+            "Brownie con helado X 2"
+        ],
+        "total": 2500
+    },
+    {
+        "fecha": "03-07-2025 11:18:50",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 2
+            },
+            {
+                "nombre": "Brownie con helado",
+                "precio": 900,
+                "cantidad": 2
+            }
+        ],
+        "productos": [
+            "Agua mineral X 2",
+            "Brownie con helado X 2"
+        ],
+        "total": 2500
     }
 ]
