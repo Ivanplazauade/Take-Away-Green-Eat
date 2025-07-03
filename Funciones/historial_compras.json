@@ -106,5 +106,25 @@
             "Batido de frutas X 2"
         ],
         "total": 1050
+    },
+    {
+        "fecha": "03-07-2025 10:37:54",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 2
+            },
+            {
+                "nombre": "Brownie con helado",
+                "precio": 900,
+                "cantidad": 1
+            }
+        ],
+        "productos": [
+            "Agua mineral X 2",
+            "Brownie con helado X 1"
+        ],
+        "total": 1250
     }
 ]
