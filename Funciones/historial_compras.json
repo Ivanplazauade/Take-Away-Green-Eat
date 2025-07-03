@@ -1,55 +1,110 @@
 [
     {
-        "fecha": "2025-06-25 19:44:39",
+        "fecha": "03-07-2025 09:49:25",
         "items": [
             {
-                "nombre": "Batido de frutas",
-                "precio": 700
+                "nombre": "Agua mineral",
+                "precio": 350
+            }
+        ],
+        "productos": [
+            "Agua mineral"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 09:57:18",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350
+            }
+        ],
+        "productos": [
+            "Agua mineral"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 10:08:49",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 1
+            }
+        ],
+        "productos": [
+            "Agua mineral"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 10:16:11",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 3
+            }
+        ],
+        "productos": [
+            "Agua mineral x3"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 10:17:19",
+        "items": [
+            {
+                "nombre": "Brownie con helado",
+                "precio": 900,
+                "cantidad": 2
             },
             {
-                "nombre": "Agua mineral",
-                "precio": 350
+                "nombre": "Cheesecake de frutos rojos",
+                "precio": 950,
+                "cantidad": 1
             }
-        ]
+        ],
+        "productos": [
+            "Brownie con helado X 2",
+            "Cheesecake de frutos rojos X 1"
+        ],
+        "total": 1850
     },
     {
-        "fecha": "2025-06-25 19:46:00",
-        "items": [
-            {
-                "nombre": "Batido de frutas",
-                "precio": 700
-            }
-        ]
-    },
-    {
-        "fecha": "2025-06-25 19:46:10",
+        "fecha": "03-07-2025 10:27:54",
         "items": [
             {
                 "nombre": "Agua mineral",
-                "precio": 350
+                "precio": 350,
+                "cantidad": 9
+            }
+        ],
+        "productos": [
+            "Agua mineral X 9"
+        ],
+        "total": 350
+    },
+    {
+        "fecha": "03-07-2025 10:29:31",
+        "items": [
+            {
+                "nombre": "Agua mineral",
+                "precio": 350,
+                "cantidad": 3
             },
             {
-                "nombre": "Agua mineral",
-                "precio": 350
-            }
-        ]
-    },
-    {
-        "fecha": "2025-06-25 19:55:25",
-        "items": [
-            {
                 "nombre": "Batido de frutas",
-                "precio": 700
+                "precio": 700,
+                "cantidad": 2
             }
-        ]
-    },
-    {
-        "fecha": "2025-06-26 11:22:12",
-        "items": [
-            {
-                "nombre": "Batido de frutas",
-                "precio": 700
-            }
-        ]
+        ],
+        "productos": [
+            "Agua mineral X 3",
+            "Batido de frutas X 2"
+        ],
+        "total": 1050
     }
 ]

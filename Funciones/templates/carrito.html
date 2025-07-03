@@ -72,6 +72,7 @@
 <body>
 
     <h1>🛒 Tu Carrito</h1>
+
     {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul style="background:#f1f1f1; padding:10px; border-radius:5px; list-style:none;">
@@ -92,7 +93,8 @@
         {% for item in carrito %}
         <li>
           <div class="item-info">
-            <span>{{ item.nombre }} - ${{ item.precio }}</span>
+            <span>{{ item.nombre }} {% if item.cantidad > 1 %} X {{ item.cantidad }}{% endif %} - ${{ item.precio }}</span>
+            <button onclick="location.href='{{ url_for('aumentar_cantidad', nombre=item.nombre) }}'">+</button>
             <a href="{{ url_for('eliminar_item_carrito', nombre=item.nombre) }}" class="basura" title="Eliminar">🗑</a>
           </div>
         </li>
@@ -105,10 +107,15 @@
         <a href="{{ url_for('menu') }}" class="boton boton-azul">⬅ Seguir pidiendo</a>
         <a href="{{ url_for('comprar_carrito') }}" class="boton">💲 Comprar carrito</a>
         <a href="{{ url_for('vaciar_carrito') }}" class="boton boton-rojo">🗑 Vaciar carrito</a>
+        <a href="{{ url_for('historial_compras') }}" class="boton boton-azul">🗒️ Ver Historial de compras</a>
     </div>
+
     {% else %}
         <p>El carrito está vacío.</p>
         <a href="{{ url_for('menu') }}" class="boton boton-azul">Ir al menú</a>
+         <div class="acciones">
+            <a href="{{ url_for('historial_compras') }}" class="boton boton-azul">🗒️ Ver Historial de compras</a>
+        </div>
     {% endif %}
     
 

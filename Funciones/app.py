@@ -166,7 +166,16 @@ def detalle_producto(nombre):
 def agregar_al_carrito(id):
     for producto in productos:
         if producto['id'] == id:
-            carrito.append({'nombre': producto['nombre'], 'precio': producto['precio']})
+            for item in carrito:
+                if item['nombre'] == producto['nombre']:
+                    item['cantidad'] += 1  # Aumentamos la cantidad
+                    break
+            else:
+                carrito.append({
+                    'nombre': producto['nombre'],
+                    'precio': producto['precio'],
+                    'cantidad': 1
+                })
             break
     return redirect(url_for('ver_carrito'))
 
@@ -186,8 +195,10 @@ def comprar_carrito():
 
     # Crear nueva compra
     compra = {
-        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "items": carrito.copy()
+        "fecha": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
+        "items": carrito.copy(),
+        "productos": [item['nombre'] + " X " + str(item['cantidad']) for item in carrito],
+        "total": sumar_precios(carrito),
     }
 
     historial = []
@@ -217,7 +228,7 @@ def comprar_carrito():
 
 
 #-------------------------------------------------------------------------------------    
-    
+# Ruta para eliminar un item del carrito, recibe el nombre del producto
 @app.route('/eliminar_item/<nombre>')
 def eliminar_item_carrito(nombre):
     global carrito
@@ -226,13 +237,39 @@ def eliminar_item_carrito(nombre):
     return redirect(url_for('ver_carrito'))
 
 #-------------------------------------------------------------------------------------
-
+# Ruta para vaciar el carrito, elimina todos los items
 @app.route('/vaciar_carrito')
 def vaciar_carrito():
     carrito.clear()  # Método de listas que vacía el contenido
     flash("🧹 Carrito vaciado.")
     return redirect(url_for('ver_carrito'))
 
+
+#--------------------------------FUNCIONES EXTRAS----------------------------------------
+
+# Ruta para ver el historial de compras, lee el archivo JSON
+@app.route('/historial_compras')
+def historial_compras():
+    try:
+        with open('historial_compras.json', 'r') as f:
+            historial = json.load(f)
+    except FileNotFoundError:
+        historial = []
+    except Exception as e:
+        flash(f"⚠️ Error al leer el historial: {e}")
+        historial = []
+
+    return render_template('historial_compras.html', historial=historial)
+
+
+#-------------------------------------------------------------------------------------
+@app.route('/aumentar_cantidad/<nombre>')
+def aumentar_cantidad(nombre):
+    for item in carrito:
+        if item['nombre'] == nombre:
+            item['cantidad'] += 1
+            break
+    return redirect(url_for('ver_carrito'))
 
 #-------------------------------------------------------------------------------------
 
